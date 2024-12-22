@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolPortalApi.Models
 {
-    public class Registration
+    public class WaitingList
     {
-        public static readonly GenerateID idGenerator = new GenerateID();
-
-        [DatabaseGenerated(DatabaseGeneratedOption.None)] // Disable automatic identity generation
-        [Key] public string ApplicantId { get; set; } 
-        public string? FirstName  { get; set; }
-        public string? MiddleName { get; set; }    
+        [Key]public int Id { get; set; }
+        public string ApplicantId { get; set; }
+        [ForeignKey("ApplicantId")]
+        public Registration Registration { get; set; }
+        public string? FirstName { get; set; }
+        public string? MiddleName { get; set; }
         public string? LastName { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Email { get; set; }
@@ -28,23 +28,6 @@ namespace SchoolPortalApi.Models
         public int JambScore { get; set; }
         public string? CourseOfStudy { get; set; }
         public double Score { get; set; }
-        public string PasswordHash { get; set; }
 
-
-        public Registration()
-        {
-            ApplicantId = idGenerator.GenerateApplicantID();
-        }
     }
-
-    public class Exam
-    {
-        [Key]public int ExamId { get; set; }
-        [ForeignKey("ApplicantId")] public string? ApplicantId { get; set; }
-        public Registration Registration { get; set; }
-        public string? Subject { get; set; }
-        public string? Grade { get; set; }
-    }
-
 }
- 

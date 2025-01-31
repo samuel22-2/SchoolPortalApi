@@ -18,7 +18,8 @@
         public DbSet <WaitingList> WaitingLists { get; set; } = default!;
         public DbSet<Role> Roles { get; set; } = default!;
         public DbSet<User> Users { get; set; } = default!;
+        public DbSet<Examss> Examsss { get; set; } = default!;
 
-        
+
     }
 }

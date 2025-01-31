@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolPortalApi.Models;
 
@@ -11,9 +12,11 @@ using SchoolPortalApi.Models;
 namespace SchoolPortalApi.Migrations
 {
     [DbContext(typeof(TestContext))]
-    partial class TestContextModelSnapshot : ModelSnapshot
+    [Migration("20241224115524_reg")]
+    partial class reg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,7 +167,6 @@ namespace SchoolPortalApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExamId"));
 
                     b.Property<string>("ApplicantId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Grade")
@@ -182,31 +184,6 @@ namespace SchoolPortalApi.Migrations
                     b.HasIndex("RegistrationApplicantId");
 
                     b.ToTable("Exams");
-                });
-
-            modelBuilder.Entity("SchoolPortalApi.Models.Examss", b =>
-                {
-                    b.Property<int>("ExamId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExamId"));
-
-                    b.Property<string>("ApplicantId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Grade")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ExamId");
-
-                    b.HasIndex("ApplicantId");
-
-                    b.ToTable("Examsss");
                 });
 
             modelBuilder.Entity("SchoolPortalApi.Models.Registration", b =>
@@ -475,17 +452,6 @@ namespace SchoolPortalApi.Migrations
                     b.HasOne("SchoolPortalApi.Models.Registration", "Registration")
                         .WithMany()
                         .HasForeignKey("RegistrationApplicantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Registration");
-                });
-
-            modelBuilder.Entity("SchoolPortalApi.Models.Examss", b =>
-                {
-                    b.HasOne("SchoolPortalApi.Models.Registration", "Registration")
-                        .WithMany()
-                        .HasForeignKey("ApplicantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

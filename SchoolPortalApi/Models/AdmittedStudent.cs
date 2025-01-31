@@ -7,8 +7,6 @@ namespace SchoolPortalApi.Models
     {
        
        [Key] public string MatricNo { get; set; } = string.Empty;
-
-       
         public string ApplicantId { get; set; }
         [ForeignKey("ApplicantId")]
         public Registration Registration { get; set; }
